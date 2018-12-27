@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   // JS 执行入口文件
@@ -10,21 +10,13 @@ module.exports = {
     // 输出文件都放到 dist 目录下
     path: path.resolve(__dirname, './dist'),
   },
-  module: {
- 
-	rules: [
+   module: {
+    rules: [
       {
         // 用正则去匹配要用该 loader 转换的 css 文件
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-			use: ['css-loader']
-		})
+        loaders: ['style-loader', 'css-loader'],
       }
     ]
-  },
-  plugins:[
-	new ExtractTextPlugin({
-		filename:`[name]_[contenthash:8].css`
-	})
-  ]
+  }
 };
