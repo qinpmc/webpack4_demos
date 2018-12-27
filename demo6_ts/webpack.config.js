@@ -9,13 +9,17 @@ module.exports = {
     // 输出文件都放到 dist 目录下
     path: path.resolve(__dirname, './dist'),
   },
-   module: {
+  resolve: {
+    // 先尝试 ts 后缀的 TypeScript 源码文件
+    extensions: ['.ts', '.js'] 
+  },
+  module: {
     rules: [
       {
-        // 用正则去匹配要用该 loader 转换的 css 文件
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
-      }
+        test: /\.ts$/,
+        use: ['awesome-typescript-loader'],
+      },
     ]
-  }
+  },
+  devtool: 'source-map' // 输出 source-map 方便直接调试 ES6 源码
 };
