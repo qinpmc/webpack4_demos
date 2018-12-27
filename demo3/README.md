@@ -1,3 +1,20 @@
+##  使用插件
+
+    
+### 1 安装extract-text-webpack-plugin  
+
+资料上采用如下安装：
+npm i -D extract-text-webpack-plugin
+运行会出现错误：
+Error: Chunk.entrypoints: Use Chunks.groupsIterable and filter by instanceof Entrypoint instead
+
+解决方案（注：此次采用的webpack4版本）： 
+npm i -D extract-text-webpack-plugin@next
+
+
+### 2 webpack.config.js
+ 
+```
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -29,3 +46,28 @@ module.exports = {
     }),
   ]
 };
+
+```
+
+**问题**
+参考资料中为：filename: "[name]_[contenthash:8].css",
+需改成上述：filename: "[name]_[hash:8].css",
+否则运行出现： Path variable [contenthash:8] not implemented in this context
+
+
+  
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
