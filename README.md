@@ -1,7 +1,7 @@
 ##  Webpack demos
 
 主要参考资料：   
-    
+http://webpack.wuhaolin.cn/
 
 ### 1 安装Webpack
  

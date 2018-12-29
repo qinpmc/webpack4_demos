@@ -1,33 +1,33 @@
-## ES6±àÒë
+## ES6ç¼–è¯‘
 
-### 1 »·¾³°²×°
+### 1 ç¯å¢ƒå®‰è£…
 
-- 1. Webpack ½ÓÈë Babel ±ØĞëÒÀÀµµÄÄ£¿é
-npm i -D babel-core babel-loader 
+- 1. Webpack æ¥å…¥ Babel å¿…é¡»ä¾èµ–çš„æ¨¡å—
+npm i -D babel-core babel-loader
 
-- 2. ¸ù¾İÄãµÄĞèÇóÑ¡Ôñ²»Í¬µÄ Plugins »ò Presets
+- 2. æ ¹æ®ä½ çš„éœ€æ±‚é€‰æ‹©ä¸åŒçš„ Plugins æˆ– Presets
 npm i -D babel-preset-env
 
-×¢Òâ£ºÒÔÉÏ°²×°µÄbabel-core babel-loader  ¿ÉÄÜ´æÔÚ°æ±¾»¥Ïà²»¼æÈİµÄÎÊÌâ£º
-ÔËĞĞwebpack¹ı³ÌÖĞ·¢ÏÖ babel-loader@8 ºÍ babel/core@6 ²»¼æÈİ¡£
+æ³¨æ„ï¼šä»¥ä¸Šå®‰è£…çš„babel-core babel-loader  å¯èƒ½å­˜åœ¨ç‰ˆæœ¬äº’ç›¸ä¸å…¼å®¹çš„é—®é¢˜ï¼š
+è¿è¡Œwebpackè¿‡ç¨‹ä¸­å‘ç° babel-loader@8 å’Œ babel/core@6 ä¸å…¼å®¹ã€‚
 
 Error: Cannot find module '@babel/core'
-babel-loader@8 requires Babel 7.x (the package '@babel/core'). 
+babel-loader@8 requires Babel 7.x (the package '@babel/core').
 If you'd like to use Babel 6.x ('babel-core'), you should install 'babel-loader@7'.
 
-Ğ¶ÔØbabel-loaderºó£¬°²×°babel-loader@7£º
-npm install babel-loader@7   
+å¸è½½babel-loaderåï¼Œå®‰è£…babel-loader@7ï¼š
+npm install babel-loader@7
 
-### 2  webpack.config.js ËµÃ÷
+### 2  webpack.config.js è¯´æ˜
 
 ```
 module.exports = {
-  // JS Ö´ĞĞÈë¿ÚÎÄ¼ş
+  // JS æ‰§è¡Œå…¥å£æ–‡ä»¶
   entry: './main.js',
   output: {
-    // °ÑËùÓĞÒÀÀµµÄÄ£¿éºÏ²¢Êä³öµ½Ò»¸ö bundle.js ÎÄ¼ş
+    // æŠŠæ‰€æœ‰ä¾èµ–çš„æ¨¡å—åˆå¹¶è¾“å‡ºåˆ°ä¸€ä¸ª bundle.js æ–‡ä»¶
     filename: 'bundle.js',
-    // Êä³öÎÄ¼ş¶¼·Åµ½ dist Ä¿Â¼ÏÂ
+    // è¾“å‡ºæ–‡ä»¶éƒ½æ”¾åˆ° dist ç›®å½•ä¸‹
     path: path.resolve(__dirname, './dist'),
   },
   module: {
@@ -38,6 +38,6 @@ module.exports = {
       },
     ]
   },
-  devtool: 'source-map' // Êä³ö source-map ·½±ãÖ±½Óµ÷ÊÔ ES6 Ô´Âë
+  devtool: 'source-map' // è¾“å‡º source-map æ–¹ä¾¿ç›´æ¥è°ƒè¯• ES6 æºç 
 };
 ```
