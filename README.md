@@ -49,6 +49,102 @@ module.exports = {
 3. 这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。     
 4. 最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。    
 
+##### 3.1 Entry
+- 代码的入口；打包的入口；一个或多个；
+
+```
+module.exports = {
+    entry: "index.js"
+}
+
+module.exports = {
+    entry: ["index.js","vendor.js"]
+}
+
+module.exports = {
+    entry: {
+        index,"vendor.js"   //index 表示一个chunk
+    }
+}
+```
+#### 3.2 Output
+- 打包成的文件（bundle）； 一个或多个；可以自定规则；可以配合CDN使用；
+
+```
+module.exports = {
+    entry: "index.js",
+    output:{
+        filename:"index.min.js"
+    }
+}
+
+
+module.exports = {
+    entry: {
+        index,"vendor.js"   //index 表示一个chunk
+        vendor:"vendor.js"
+    },
+    output:{
+        filename: "[name].min.[hash:5].js"
+    }
+
+
+}
+
+```
+
+#### 3.3 Loader
+- 处理文件；转换为模块；
+- 编译相关（babel-loader、ts-loader) ;样式相关（style-loader、css-loader、less-loader）;文件相关（file-loader、url-loader）
+```
+module.exports = {
+
+  module: {
+    rules: [
+      {
+        test: /\.scss/,// 增加对 SCSS 文件的支持
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ]
+  },
+};
+
+```
+#### 3.4 Plugin
+- 参与打包整个过程； 打包优化和压缩；配置编译时的变量；
+- 优化相关的插件（CommonsChunkPlugin、UglifyjsWebpackPlugin）；功能相关插件（ExtractTextWebpackPlugin、HtmlWebpackPlugin）
+```
+module.exports = {
+
+  plugins: [new webpack.optimize.UglifyJsPlugin()]
+};
+
+module.exports = {
+
+  plugins: [
+    new ExtractTextPlugin({
+      // 从 .js 文件中提取出来的 .css 文件的名称
+      filename: "[name]_[hash:8].css",
+    }),
+  ]
+};
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
