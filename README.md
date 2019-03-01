@@ -17,7 +17,15 @@ npm i -D webpack@<version>
 npm i -g webpack
 
 
-### 2 Webpack基本使用
+### 2 
+创建项目结构
+
+mkdir webpack-demo && cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev
+
+
+### 3 Webpack基本使用
 
 ```
 const path = require('path');
@@ -34,7 +42,7 @@ module.exports = {
 };
 ```
 
-### 3 Webpack 核心概念：
+### 4 Webpack 核心概念：
 
 - Entry：入口，Webpack 执行构建的第一步将从 Entry 开始，可抽象成输入。 
 - Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。
@@ -49,7 +57,7 @@ module.exports = {
 3. 这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。     
 4. 最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。    
 
-##### 3.1 Entry
+##### 4.1 Entry
 - 代码的入口；打包的入口；一个或多个；
 
 ```
@@ -67,7 +75,7 @@ module.exports = {
     }
 }
 ```
-#### 3.2 Output
+#### 4.2 Output
 - 打包成的文件（bundle）； 一个或多个；可以自定规则；可以配合CDN使用；
 
 ```
@@ -93,7 +101,7 @@ module.exports = {
 
 ```
 
-#### 3.3 Loader
+#### 4.3 Loader
 - 处理文件；转换为模块；
 - 编译相关（babel-loader、ts-loader) ;样式相关（style-loader、css-loader、less-loader）;文件相关（file-loader、url-loader）
 ```
@@ -110,7 +118,7 @@ module.exports = {
 };
 
 ```
-#### 3.4 Plugin
+#### 4.4 Plugin
 - 参与打包整个过程； 打包优化和压缩；配置编译时的变量；
 - 优化相关的插件（CommonsChunkPlugin、UglifyjsWebpackPlugin）；功能相关插件（ExtractTextWebpackPlugin、HtmlWebpackPlugin）
 ```
