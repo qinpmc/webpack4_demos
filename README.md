@@ -15,7 +15,7 @@ npm i -D webpack@<version>
 - 安装 Webpack 到全局
  
 npm i -g webpack
-
+推荐安装到本项目，原因是可防止不同项目依赖不同版本的 Webpack 而导致冲突。
 
 ### 2 
 创建项目结构
@@ -23,6 +23,8 @@ npm i -g webpack
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install webpack webpack-cli --save-dev
+
+
 
 
 ### 3 Webpack基本使用
