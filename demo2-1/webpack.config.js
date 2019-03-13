@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  // JS 执行入口文件---多个入口
+  // JS 执行入口文件---多个入口 示例
   entry: {
     bundle1: './main1.js',
     bundle2: './main2.js'

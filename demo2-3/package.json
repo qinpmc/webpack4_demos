@@ -1,0 +1,22 @@
+{
+  "name": "demo1",
+  "version": "1.0.0",
+  "description": "演示分离公共代码抽取打包",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "import-local": "^1.0.0",
+    "lodash": "^4.17.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

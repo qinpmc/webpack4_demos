@@ -1,6 +1,8 @@
 const path = require('path');
 const ExtractTextPlugin  = require("extract-text-webpack-plugin")
 
+// 使用 ExtractTextPlugin 将css 打包单独文件示例
+
 module.exports = {
   // JS 执行入口文件
   entry: './main.js',

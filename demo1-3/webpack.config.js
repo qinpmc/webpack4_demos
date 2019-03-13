@@ -1,5 +1,7 @@
 const path = require('path');
 
+
+// 使用 DevServer
 module.exports = {
   // JS 执行入口文件
   entry: './main.js',
