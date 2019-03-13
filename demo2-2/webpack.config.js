@@ -16,7 +16,7 @@ module.exports = {
         new CleanWebpackPlugin(['dist'])
     ],
     optimization: {
-        minimize: false,
+        minimize: false, // 默认true 压缩
         splitChunks: {
             chunks: "all",  //  async
             minSize: 1,
