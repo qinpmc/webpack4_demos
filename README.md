@@ -29,7 +29,7 @@ npm install webpack webpack-cli --save-dev
 
 
 ### 3.1 示例演示：打包js 和 css文件
-
+示例：demo1-1   
 
 Webpack 把一切文件看作模块，CSS 文件也不例外。因为 Webpack 不原生支持解析 CSS 文件。要支持非 JavaScript 类型的文件，需要使用 Webpack 的 Loader 机制。     
 
@@ -72,7 +72,11 @@ Loader 可以看作具有文件转换功能的翻译员，配置里的 module.ru
 
 
 
+
+
 ### 3.2 示例演示：打包js 和 css文件,将css文件提取到单独的文件中
+
+示例：demo1-2
 
 **使用extract-text-webpack-plugin**
 
@@ -146,9 +150,7 @@ Error: Path variable [contenthash:8] not implemented in this context: [name]_[co
   即 filename: "[name]_[contenthash:8].css" 改为 filename: "[name]_[hash:8].css"
 
 
-
-
-
+ 
 
 
 ### 使用mini-css-extract-plugin 替代 extract-text-webpack-plugin@next
@@ -191,24 +193,108 @@ module.exports = {
 ```
 
 
-### 3 Webpack基本使用
+
+
+### 3.3 示例演示：打包js 和 css文件,使用 DevServer
+
+示例：demo1-3
+
+
+实际开发中你可能会需要：  
+
+- 提供 HTTP 服务而不是使用本地文件预览；               
+- 监听文件的变化并自动刷新网页，做到实时预览；              
+- 支持 Source Map，以方便调试。  
+             
+
+
+1. 安装 DevServer：
+
+npm i -D webpack-dev-server
+
+
+2. 执行 webpack-dev-server 命令： 
+
+./node_modules/.bin/webpack-dev-server    
+
+DevServer 启动的 HTTP 服务器监听在 http://localhost:8080/   
+
+
+
+3. 由于 DevServer 不会理会 webpack.config.js 里配置的 output.path 属性，    
+所以要获取 bundle.js 的正确 URL 是 http://localhost:8080/bundle.js，对应的 index.html 应该修改为：   
+
+```
+<!--导入 DevServer 输出的 JavaScript 文件-->
+<script src="bundle.js"></script>
+
+``` 
+
+
+4. 支持 Source Map   
+Webpack 支持生成 Source Map，只需在启动时带上 --devtool source-map 参数  
+
+
+
+### 3.4 示例演示：多个入口 示例
+示例: demo2-1  
+
 
 ```
 const path = require('path');
 
 module.exports = {
-  // JavaScript 执行入口文件
-  entry: './main.js',
+  // JS 执行入口文件---多个入口 示例
+  entry: {
+    bundle1: './main1.js',
+    bundle2: './main2.js'
+  },
   output: {
     // 把所有依赖的模块合并输出到一个 bundle.js 文件
-    filename: 'bundle.js',
+    filename: '[name].js',
     // 输出文件都放到 dist 目录下
     path: path.resolve(__dirname, './dist'),
-  }
+  } 
 };
 ```
 
-### 4 Webpack 核心概念：
+### 3.5 示例演示： splitChunks 
+
+示例 demo2-2 demo2-3
+
+```
+const path = require('path');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+module.exports = {
+    mode: "production",
+    entry: {
+        english: "./src/english.js",
+        math: "./src/math.js",
+        chinese: "./src/chinese.js",
+    },
+    output: {
+        filename: "[name].bundle.js",
+        path: path.resolve(__dirname, 'dist'),
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist'])
+    ],
+    optimization: {
+        minimize: false, // 默认true 压缩
+        splitChunks: {
+            chunks: "all",  //  async
+            minSize: 1,
+			maxInitialRequests:3,
+            automaticNameDelimiter: '~',
+        }
+    },
+};
+
+```
+
+ 
+## 4 Webpack 核心概念：
 
 - Entry：入口，Webpack 执行构建的第一步将从 Entry 开始，可抽象成输入。 
 - Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。
@@ -223,7 +309,7 @@ module.exports = {
 3. 这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。     
 4. 最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。    
 
-##### 4.1 Entry
+### 4.1 Entry
 - 代码的入口；打包的入口；一个或多个；
 
 ```
@@ -241,8 +327,27 @@ module.exports = {
     }
 }
 ```
-#### 4.2 Output
+### 4.2 Output
 - 打包成的文件（bundle）； 一个或多个；可以自定规则；可以配合CDN使用；
+
+
+1. 如果只有一个输出文件，则可以把它写成静态不变的：
+filename: 'bundle.js'
+
+2. 在有多个 Chunk 要输出时，就需要借助模版和变量了。Webpack 会为每个 Chunk取一个名称，可以根据 Chunk 的名称来区分输出的文件名：   
+filename: '[name].js'
+
+
+**内置变量除了 name 还包括**：
+
+变量名	     含义
+- id	     Chunk 的唯一标识，从0开始  
+- name	     Chunk 的名称   
+- hash	     Chunk 的唯一标识的 Hash 值   
+- chunkhash	 Chunk 内容的 Hash 值    
+其中 hash 和 chunkhash 的长度是可指定的，[hash:8] 代表取8位 Hash 值，默认是20位。
+
+
 
 ```
 module.exports = {
@@ -270,6 +375,12 @@ module.exports = {
 #### 4.3 Loader
 - 处理文件；转换为模块；
 - 编译相关（babel-loader、ts-loader) ;样式相关（style-loader、css-loader、less-loader）;文件相关（file-loader、url-loader）
+
+Loader采用 rules 配置模块读取和解析规则，其类型为数组，数组每一项描述如何处理部分文件：
+1. 条件匹配： 用test/ include / exclude 选中Loader要应用的文件
+2. 应用规则： 使用use 配置项
+3. 重置顺序：Loader的执行顺序为从右到左，可用enforce选项将一个Loader执行顺序放到最前或最后
+ 
 ```
 module.exports = {
 
@@ -277,8 +388,26 @@ module.exports = {
     rules: [
       {
         test: /\.scss/,// 增加对 SCSS 文件的支持
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'], // 先交给sass-loader处理，然后css-loader,最后style-loader
+		exclude:path.resolve(__dirname,'node_modules')
       },
+	  {
+	  // 非文本文件采用file-loader加载
+		test:/\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
+		use:['file-loader']
+	  }，
+	  {
+		test:/\.js$/,
+		use:[  // loader传入很多参数时，通过一个Object 来描述
+		{
+			loader:'babel-loader',
+			options:{
+				cacheDirectory:true
+			},
+			enforce:'post'
+		
+		}]
+	  }
     ]
   },
 };

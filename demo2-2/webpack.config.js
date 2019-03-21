@@ -20,6 +20,7 @@ module.exports = {
         splitChunks: {
             chunks: "all",  //  async
             minSize: 1,
+			maxInitialRequests:3,
             automaticNameDelimiter: '~',
         }
     },
