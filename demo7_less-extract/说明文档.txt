@@ -1,0 +1,16 @@
+mini-css-extract-plugin： 提取css文件
+
+ npm i postcss-loader  autoprefixer -D
+
+postcss-loader  autoprefixer : 给css样式添加前缀
+
+根目录添加：postcss.config.js 文件，内容：
+
+module.exports = {
+	plugins:[require('autoprefixer')({
+		"browsers": [
+			'last 100 versions'
+		]	
+	})]
+	
+}

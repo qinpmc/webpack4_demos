@@ -1,6 +1,8 @@
 const path = require('path');
 let HtmlWebpackPlugin = require("html-webpack-plugin");
+let MiniCssExtractPlugin = require("mini-css-extract-plugin");
  
+
 module.exports = {
   // JS 执行入口文件
   entry: './main.js',
@@ -14,18 +16,14 @@ module.exports = {
     rules: [
       {
 		test: /\.less$/,// 增加对 less文件的支持
-		use: ['style-loader', 'css-loader', 'less-loader'],
+		use: [MiniCssExtractPlugin.loader,'css-loader','postcss-loader','less-loader'],
       },
 	  {
 		  test: /\.css$/,
 		  use:[
-		  {
-			loader: 'style-loader',
-			options:{
-				insertAt:'top'
-			}   
-		  },
-		  'css-loader'  
+			MiniCssExtractPlugin.loader,
+			'css-loader',
+			'postcss-loader',
 		  ]
 	  }
     ]
@@ -38,8 +36,11 @@ module.exports = {
                 removeAttributeQuotes:true, // 删除引号
                 collapseWhitespace:true  //折行
             }
-        })
- 
+        }),
+		new MiniCssExtractPlugin({
+			  filename: "[name].css",
+			  chunkFilename: "[id].css"
+		}) 
     ],
 	    devServer:{
         port:3000,

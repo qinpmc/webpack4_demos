@@ -1,0 +1,13 @@
+body div {
+  border: 1px solid green;
+}
+
+body{
+	background:pink;
+	-webkit-transform:rotate(45deg);
+	   -moz-transform:rotate(45deg);
+	    -ms-transform:rotate(45deg);
+	     -o-transform:rotate(45deg);
+	        transform:rotate(45deg);
+	
+}
