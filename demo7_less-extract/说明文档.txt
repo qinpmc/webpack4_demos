@@ -1,10 +1,10 @@
-mini-css-extract-plugin£º ÌáÈ¡cssÎÄ¼ş
+mini-css-extract-pluginï¼š æå–cssæ–‡ä»¶
 
  npm i postcss-loader  autoprefixer -D
 
-postcss-loader  autoprefixer : ¸øcssÑùÊ½Ìí¼ÓÇ°×º
+postcss-loader  autoprefixer : ç»™cssæ ·å¼æ·»åŠ å‰ç¼€
 
-¸ùÄ¿Â¼Ìí¼Ó£ºpostcss.config.js ÎÄ¼ş£¬ÄÚÈİ£º
+æ ¹ç›®å½•æ·»åŠ ï¼špostcss.config.js æ–‡ä»¶ï¼Œå†…å®¹ï¼š
 
 module.exports = {
 	plugins:[require('autoprefixer')({
