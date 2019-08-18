@@ -1,0 +1,3 @@
+webpack is not defined错误解决
+
+只需在webpack配置文件文件头部加上 const webpack = require('webpack');即可
