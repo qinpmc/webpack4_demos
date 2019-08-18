@@ -463,7 +463,38 @@ code runner 插件：
 vscode 搜索extensions，安装 code runner ,可直接快速运行一段代码
 
 
+------------------------------------------
+webpack的命令执行 及配置文件
+ 
+node_modules 目录下有 bin目录，bin目录下有 webpack.cmd 文件 和webpack-cli.cmd
 
+webpack.cmd 内容如下：
+
+
+```
+@IF EXIST "%~dp0\node.exe" (
+  "%~dp0\node.exe"  "%~dp0\..\webpack\bin\webpack.js" %*     // 当前目录下有node.exe 执行 node.exe "%~dp0\..\webpack\bin\webpack.js"
+) ELSE (
+  @SETLOCAL
+  @SET PATHEXT=%PATHEXT:;.JS;=;%
+  node  "%~dp0\..\webpack\bin\webpack.js" %*    // 否则执行 node "%~dp0\..\webpack\bin\webpack.js"
+)
+```
+
+
+webpack 打包的配置文件默认为 webpack.config.js or webpackfile.js 
+详细可见 node_modules/webpack-cli/bin/config-yargs.js :
+
+```
+.options({
+			config: {
+				type: "string",
+				describe: "Path to the config file",
+				group: CONFIG_GROUP,
+				defaultDescription: "webpack.config.js or webpackfile.js",
+				requiresArg: true
+			},
+```
 
 
 

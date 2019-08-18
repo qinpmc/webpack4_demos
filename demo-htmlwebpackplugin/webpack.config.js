@@ -1,7 +1,7 @@
 let path = require("path");
 let HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
-    mode:"development",
+    mode:"production",
     entry:"./src/index.js",
     output:{
         filename:"bundle.[hash:8].js",
@@ -19,8 +19,9 @@ module.exports = {
             filename:"index.html",
             minify:{
                 removeAttributeQuotes:true, // 删除引号
-                collapseWhitespace:true  //折行
-            }
+                collapseWhitespace:true  //折行成一行
+            },
+			hash:true
         })
     ]
 }
