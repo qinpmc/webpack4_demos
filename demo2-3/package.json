@@ -13,8 +13,8 @@
     "clean-webpack-plugin": "^0.1.19",
     "import-local": "^1.0.0",
     "lodash": "^4.17.10",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "jquery": "^3.2.1"
